@@ -11,7 +11,7 @@ import {
   Link,
 } from "native-base";
 import { VStack } from "native-base";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -20,7 +20,7 @@ const Inputt = () => {
   const [show, setShow] = React.useState(false);
   const auth = getAuth();
   function CreateUser(email, password) {
-    
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
@@ -29,7 +29,7 @@ const Inputt = () => {
         // ...
       })
       .catch((error) => {
-        
+
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorMessage);
@@ -39,25 +39,25 @@ const Inputt = () => {
   }
   function LoginUser(email, password) {
     signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
 
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
 
-  });
+      });
   }
-//   CreateUser("byeole80@gmail.com", "passwe122")
-// LoginUser("byeole80@gmail.com", "passwe122")
-function Login() {
+  //   CreateUser("byeole80@gmail.com", "passwe122")
+  // LoginUser("byeole80@gmail.com", "passwe122")
+  function Login() {
     console.log('Login Success')
-}
+  }
   return (
     <VStack space={4} w="100%" alignItems="center">
       <Input
@@ -101,6 +101,7 @@ function Login() {
 
 
 const ButtonSubmit = () => {
+  //sdf
   return (
     <Box alignItems="center">
       <Button onPress={() => Login}>Login</Button>
@@ -109,6 +110,7 @@ const ButtonSubmit = () => {
 };
 
 const Forgot = () => {
+  //ghf
   return (
     <Box alignItems="center">
       <Link href="https://nativebase.io">Forgot Password ?</Link>
@@ -117,6 +119,10 @@ const Forgot = () => {
 };
 
 export default () => {
+
+  //df
+
+
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
