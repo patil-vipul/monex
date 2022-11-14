@@ -1,39 +1,20 @@
-import { StyleSheet } from 'react-native';
-import { NativeBaseProvider, AddIcon, Text, Fab, Box, Skeleton } from "native-base";
-import { useEffect, useState } from 'react';
-import Header from './components/Header';
-import BalanceCard from './components/BalanceCard';
-import TransactionList from './components/TransactionList';
-import useTransactions from './hooks/useTransactions';
+import { NativeBaseProvider } from "native-base";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from "./screens/Home";
+import AddTransaction from "./screens/AddTransaction";
 
 export default function App() {
-
-  const { transactions, isLoaded: isTransactionLoaded } = useTransactions()
-
+  const Stack = createNativeStackNavigator();
   return (
-    <NativeBaseProvider>
-      <Box margin="32px">
 
-        <Header></Header>
-
-        <BalanceCard></BalanceCard>
-
-        <Text fontSize="lg" my="16px">Transactions</Text>
-
-        <Skeleton h="20" rounded="5" isLoaded={isTransactionLoaded}>
-          <TransactionList transactions={transactions}></TransactionList>
-        </Skeleton>
-
-      </Box>
-
-      <Fab renderInPortal={false} shadow={2} size="sm" icon={<AddIcon color="white" name="plus" size="sm" />} />
-
-    </NativeBaseProvider >
+    <NavigationContainer>
+      <NativeBaseProvider>
+        <Stack.Navigator  initialRouteName="Home" screenOptions={{ headerShown: false, cardStyle: { flex: 1 } }}>
+          <Stack.Screen options={{ cardStyle: { flex: 1 } }} name="Home" component={Home} />
+          <Stack.Screen name="AddTransaction" component={AddTransaction} />
+        </Stack.Navigator>
+      </NativeBaseProvider >
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    marginBottom: 16
-  }
-});
