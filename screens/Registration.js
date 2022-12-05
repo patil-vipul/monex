@@ -28,7 +28,8 @@ export default function Signup({ navigation }) {
   useEffect(() => {
     //  setEmail('bhavesh')
   }, []);
-
+  // validate: value =>
+  // value === password.current || "The passwords do not match"
   const auth = getAuth();
 
   function createUser(name, email, password, phone) {
@@ -153,9 +154,8 @@ export default function Signup({ navigation }) {
             value={passwordc}
             onChange={(el) => {
               setPasswordc(el.target.value);
-              validate: value =>
-            value === password.current || "The passwords do not match"
             }}
+            
             type={show ? "text" : "password"}
             InputRightElement={
               <Pressable onPress={() => setShow(!show)}>
@@ -176,10 +176,10 @@ export default function Signup({ navigation }) {
           />
         </VStack>
         <Box alignItems="center">
-          <Button onPress={() => Signupp()}>Signup</Button>
+          <Button onPress={() => Signup()}>Signup</Button>
         </Box>
         <Box alignItems="center">
-          <Link href="login2.js">Already have an account ? Log In</Link>
+          <Link onPress={() => navigation.navigate('login2')}>Already have an account ? Log In</Link>
         </Box>
       </VStack>
     </Center>
