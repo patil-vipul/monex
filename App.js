@@ -14,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <NativeBaseProvider>
         <Stack.Navigator
-          initialRouteName="Registration"
+          initialRouteName="Home"
           screenOptions={{ headerShown: false, cardStyle: { flex: 1 } }}
         >
           <Stack.Screen
