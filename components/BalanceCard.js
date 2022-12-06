@@ -4,7 +4,7 @@ import useSpends from "../hooks/useSpends";
 export default function BalanceCard() {
 
     const { balance, isLoaded: isBalanceLoaded } = useBalance()
-   // const {spends, isLoaded: isSpendsLoaded} = useSpends()
+    // const {spends, isLoaded: isSpendsLoaded} = useSpends()
 
     return (
         <Box padding="16px" rounded="5px" bg="#f5f5f5">
@@ -12,7 +12,6 @@ export default function BalanceCard() {
             <Skeleton h="10" isLoaded={isBalanceLoaded}>
                 <Text fontSize="4xl">₹ {balance}</Text>
             </Skeleton>
-
         </Box>
     )
 }

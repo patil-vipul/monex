@@ -40,7 +40,6 @@ export default function Menu({ navigation }) {
           Bhavesh Yeole
         </Text>
       </HStack>
-
       <HStack
         marginBottom="30px"
         shadow={6}
@@ -73,8 +72,8 @@ export default function Menu({ navigation }) {
           colorScheme="gray"
           shadow={2}
           marginLeft="38"
-          // alignItems="center"
-          // justifyContent="center"
+        // alignItems="center"
+        // justifyContent="center"
         ></IconButton>
       </HStack>
       <HStack
