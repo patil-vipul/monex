@@ -137,10 +137,10 @@ export default function Menu({ navigation }) {
           width="364"
           height="66"
           borderWidth="2"
+          borderColor="black"
           paddingLeft="16px"
           alignItems="center"
           rounded="6px"
-          borderColor="trueGray.200"
           marginTop="5"
         >
           Logout
