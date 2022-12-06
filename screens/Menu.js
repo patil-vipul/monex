@@ -13,6 +13,7 @@ import {
   Image,
   Heading,
   Stack,
+  IconButton,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -63,7 +64,8 @@ export default function Menu({ navigation }) {
             </Text>
           </Stack>
         </Box>
-        <Button
+        <IconButton
+          icon={<Icon as={MaterialIcons} name="arrow-forward" />}
           width="8"
           height="8"
           rounded="100%"
@@ -73,7 +75,7 @@ export default function Menu({ navigation }) {
           marginLeft="38"
           // alignItems="center"
           // justifyContent="center"
-        ></Button>
+        ></IconButton>
       </HStack>
       <HStack
         marginBottom="15px"
