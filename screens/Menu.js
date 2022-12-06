@@ -15,16 +15,33 @@ import {
   Stack,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
-import BalanceCard from "../components/BalanceCard";
-import useBalance from "../components/BalanceCard";
+
+import SpendCard from "../components/SpendCard";
 
 export default function Menu({ navigation }) {
   const [clickable, setClickable] = React.useState(false);
 
   return (
     <Box padding="24px" backgroundColor="white">
+      <HStack space="20">
+        <Image
+          size={75}
+          borderRadius={100}
+          marginTop="-2"
+          marginBottom="5"
+          marginLeft="2"
+          source={{
+            uri: "https://wallpaperaccess.com/full/317501.jpg",
+          }}
+          alt="Alternate Text"
+        />
+        <Text bold marginTop="4">
+          Bhavesh Yeole
+        </Text>
+      </HStack>
+
       <HStack
-        marginBottom="20px"
+        marginBottom="30px"
         shadow={6}
         padding="8px"
         borderWidth="2"
@@ -42,13 +59,24 @@ export default function Menu({ navigation }) {
             </Stack>
 
             <Text fontSize="lg" bold>
-              {balance}
+              <SpendCard></SpendCard>
             </Text>
           </Stack>
         </Box>
+        <Button
+          width="8"
+          height="8"
+          rounded="100%"
+          variant="subtle"
+          colorScheme="gray"
+          shadow={2}
+          marginLeft="38"
+          // alignItems="center"
+          // justifyContent="center"
+        ></Button>
       </HStack>
       <HStack
-        marginBottom="10px"
+        marginBottom="15px"
         shadow={6}
         padding="8px"
         borderWidth="2"
@@ -64,7 +92,7 @@ export default function Menu({ navigation }) {
         </Box>
       </HStack>
       <HStack
-        marginBottom="10px"
+        marginBottom="15px"
         shadow={6}
         padding="8px"
         borderWidth="2"
@@ -82,7 +110,7 @@ export default function Menu({ navigation }) {
         </Box>
       </HStack>
       <HStack
-        marginBottom="10px"
+        marginBottom="15px"
         shadow={6}
         padding="8px"
         borderWidth="2"
@@ -99,24 +127,23 @@ export default function Menu({ navigation }) {
           <Text>This is the text for settings</Text>
         </Box>
       </HStack>
-      {/* <HStack  shadow={6}
-            borderWidth="2"
-            borderColor="trueGray.200">
-          <Icon
-            as={<MaterialIcons name="settings" />}
-            size={33}
-            ml="2"
-            color="muted.500"
-          />
-          <Box
-            width="300"
-            p="5"
-           
-          >
-            <Text>Settings</Text>
-            <Text>This is the text for settings</Text>
-          </Box>
-        </HStack> */}
+      <HStack>
+        <Button
+          variant="outline"
+          marginBottom="15px"
+          shadow={3}
+          width="364"
+          height="66"
+          borderWidth="2"
+          paddingLeft="16px"
+          alignItems="center"
+          rounded="6px"
+          borderColor="trueGray.200"
+          marginTop="5"
+        >
+          Logout
+        </Button>
+      </HStack>
     </Box>
   );
 }
