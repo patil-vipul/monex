@@ -32,30 +32,36 @@ export default function Signup({ navigation }) {
   // value === password.current || "The passwords do not match"
   const auth = getAuth();
 
-  function createUser(name, email, password, phone) {
-    createUserWithEmailAndPassword(auth, name, email, password, phone)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        // ..
-      });
+  // function createUser(email, password) {
+
+
+  //   return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+  //       // Signed in
+  //       const user = userCredential.user;
+  //       console.log(user);
+  //       return "bhavesh";
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       const errorCode = error.code;
+  //       const errorMessage = error.message;
+  //       console.log(errorMessage);
+  //       // ..
+  //     });
+  // }
+
+
+  async function register() {
+    var fbObject = await createUserWithEmailAndPassword(auth, email, password);
+    var userID = fbObject.user.uid;
+    
+    //res = (uid, name, email, pass, phone)
+    //res == true
+    //to homepage
+    //error show 
   }
 
-  // createUser("byeole80@gmail.com", "passwe122")
-  // loginUser("byeole80@gmail.com", "passwe122")
 
-  function Signupp() {
-    console.log("Login Success");
-    console.log(name, phone, email, password);
-    createUser(name, phone, email, password);
-  }
 
   return (
     <Center h="100%" bg="white">
@@ -66,7 +72,7 @@ export default function Signup({ navigation }) {
               base: "75%",
               md: "25%",
             }}
-            value={name}
+           
             onChange={(el) => {
               setName(el.target.value);
             }}
@@ -85,7 +91,7 @@ export default function Signup({ navigation }) {
               base: "75%",
               md: "25%",
             }}
-            value={phone}
+            
             onChange={(el) => {
               setPhone(el.target.value);
             }}
@@ -105,7 +111,7 @@ export default function Signup({ navigation }) {
               base: "75%",
               md: "25%",
             }}
-            value={email}
+           
             onChange={(el) => {
               setEmail(el.target.value);
             }}
@@ -125,7 +131,7 @@ export default function Signup({ navigation }) {
               base: "75%",
               md: "25%",
             }}
-            value={password}
+            
             onChange={(el) => {
               setPassword(el.target.value);
             }}
@@ -151,7 +157,7 @@ export default function Signup({ navigation }) {
               base: "75%",
               md: "25%",
             }}
-            value={passwordc}
+            
             onChange={(el) => {
               setPasswordc(el.target.value);
             }}
@@ -176,7 +182,7 @@ export default function Signup({ navigation }) {
           />
         </VStack>
         <Box alignItems="center">
-          <Button onPress={() => Signup()}>Signup</Button>
+          <Button onPress={() => register()}>Signup</Button>
         </Box>
         <Box alignItems="center">
           <Link onPress={() => navigation.navigate('login2')}>Already have an account ? Log In</Link>
