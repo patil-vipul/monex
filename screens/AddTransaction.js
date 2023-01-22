@@ -2,6 +2,7 @@ import { ChevronLeftIcon, Button, Select, Text, TextArea, CheckIcon, Fab, Input,
 import { useState } from "react";
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import useAPI from "../hooks/useAPI";
 
 export default function AddTransaction({ navigation }) {
     const transactionSchema = yup.object().shape({
@@ -12,6 +13,7 @@ export default function AddTransaction({ navigation }) {
       });
     const additionalTags = ['Subscription', 'Rent', 'Gaming'];
     const [selectedAdditionalTags, setSelectedAdditionalTags] = useState([])
+    const { call} = useAPI('http://localhost:3333/transaction')
     function handleAdditionalTagsChange(itemValue) {
         let tags = [...selectedAdditionalTags]
         tags.push(itemValue)
@@ -23,9 +25,12 @@ export default function AddTransaction({ navigation }) {
         setSelectedAdditionalTags(tags)
     }
 
-    function createTransaction(values){
+    async function createTransaction(values){
         console.log(values)
-        
+        values.type = values.transactionType
+        values.user = 'qq9XmMWXPKbEm58IvXFw6KJnkBd2'
+        let res = await call(values)
+        console.log(res)
     }
 
 

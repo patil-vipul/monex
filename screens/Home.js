@@ -2,11 +2,10 @@ import { AddIcon, Text, Fab, Box, Skeleton } from "native-base";
 import Header from '../components/Header';
 import BalanceCard from '../components/BalanceCard';
 import TransactionList from '../components/TransactionList';
-import useTransactions from '../hooks/useTransactions';
+import useFetch from "../hooks/useFetch";
+import { useEffect } from "react";
 export default function Home({ navigation }) {
-
-    const { transactions, isLoaded: isTransactionLoaded } = useTransactions()
-
+    const { data: transactions, isLoaded:isTransactionLoaded, error, setData } = useFetch('http://localhost:3333/transactions') 
     return (
         <Box bg="#fff" h="100%">
             <Box margin="32px">

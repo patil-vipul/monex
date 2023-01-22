@@ -10,7 +10,7 @@ export default function App() {
 
     <NavigationContainer>
       <NativeBaseProvider>
-        <Stack.Navigator  initialRouteName="AddTransaction" screenOptions={{ headerShown: false, cardStyle: { flex: 1 } }}>
+        <Stack.Navigator  initialRouteName="Home" screenOptions={{ headerShown: false, cardStyle: { flex: 1 } }}>
           <Stack.Screen options={{ cardStyle: { flex: 1 } }} name="Home" component={Home} />
           <Stack.Screen name="AddTransaction" component={AddTransaction} />
         </Stack.Navigator>
