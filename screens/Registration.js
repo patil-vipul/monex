@@ -50,8 +50,24 @@ export default function Signup({ navigation }) {
   //     });
   // }
 
-
   async function register() {
+    console.log(password, passwordc)
+   
+    if(!password){
+      alert('Please enter password');
+      return
+    }
+    if(!passwordc){  
+      alert('Please enter password again');
+      return
+    }
+
+    if(password !== passwordc){
+      alert('Password not same');
+      return
+    }
+
+    console.log('Creating firebase user')
     var fbObject = await createUserWithEmailAndPassword(auth, email, password);
     var userID = fbObject.user.uid;
     
@@ -60,8 +76,6 @@ export default function Signup({ navigation }) {
     //to homepage
     //error show 
   }
-
-
 
   return (
     <Center h="100%" bg="white">
