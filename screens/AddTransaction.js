@@ -1,19 +1,22 @@
-import { ChevronLeftIcon, Button, Select, Text, TextArea, CheckIcon, Fab, Input, Box, Skeleton, Heading, Pressable, Center, HStack, AddIcon, Badge, Divider, SmallCloseIcon } from "native-base";
+import { ChevronLeftIcon, Button, Select, Text, Alert, VStack, TextArea, CheckIcon, Fab, Input, Box, Skeleton, Heading, Pressable, Center, HStack, AddIcon, Badge, Divider, SmallCloseIcon, CloseIcon, Collapse } from "native-base";
+import { useToast } from 'native-base';
 import { useState } from "react";
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import useAPI from "../hooks/useAPI";
+import { getStore } from "../libraries/store";
 
 export default function AddTransaction({ navigation }) {
+    const toast = useToast();
     const transactionSchema = yup.object().shape({
         amount: yup.number().required('Amount is required').positive(),
         transactionType: yup.number().required('Select a transaction type'),
         memo: yup.string(),
         category: yup.number(),
-      });
+    });
     const additionalTags = ['Subscription', 'Rent', 'Gaming'];
     const [selectedAdditionalTags, setSelectedAdditionalTags] = useState([])
-    const { call} = useAPI('http://localhost:3333/transaction')
+    const { call } = useAPI('http://localhost:3333/transaction')
     function handleAdditionalTagsChange(itemValue) {
         let tags = [...selectedAdditionalTags]
         tags.push(itemValue)
@@ -25,46 +28,61 @@ export default function AddTransaction({ navigation }) {
         setSelectedAdditionalTags(tags)
     }
 
-    async function createTransaction(values){
+    async function createTransaction(values) {
         console.log(values)
         values.type = values.transactionType
-        values.user = 'qq9XmMWXPKbEm58IvXFw6KJnkBd2'
+        
+        let user = await getStore('user');
+        values.user = user.userId
         let res = await call(values)
-        console.log(res)
+        if (res.success) {
+            toast.show({
+                render: () => {
+                    return <Alert variant="subtle" bg="#BFDBFE" >
+                        <HStack space={2} flexShrink={1} alignItems="center">
+                            <Alert.Icon />
+                            <Text >
+                                Transaction added!
+                            </Text>
+                        </HStack>
+                    </Alert>;
+                }
+            });
+        }
     }
 
 
 
     return (
         <Box bg="#fff" h="100%">
-            <Box margin="32px" paddingBottom="30px">
+            <Box padding="24px">
 
-                <HStack space={3} alignItems="center">
-                    <Button rounded="50" w="40px" h="40px" onPress={() => navigation.goBack()} size="md" variant="ghost">
-                        <ChevronLeftIcon w="40px" h="40px"></ChevronLeftIcon>
+                <HStack alignItems="center">
+                    <Button rounded="50" padding="0" onPress={() => navigation.goBack()} variant="ghost">
+                        <ChevronLeftIcon ></ChevronLeftIcon>
                     </Button>
-                    <Heading>Add transaction</Heading>
+                    <Text fontSize={'20px'} marginLeft="24px">Add transaction</Text>
                 </HStack>
 
-                <Formik initialValues={{ amount: '',transactionType:'',memo:'', category: '' }} onSubmit={createTransaction} validationSchema={transactionSchema}>
+
+                <Formik initialValues={{ amount: '', transactionType: '', memo: '', category: '' }} onSubmit={createTransaction} validationSchema={transactionSchema}>
                     {({ handleChange, handleBlur, handleSubmit, values }) => (
                         <Box>
                             <Box mt='24px'>
-                                <Text bold fontSize="lg">Amount</Text>
-                                <Input keyboardType="numeric" mt='16px'
+                                <Text fontSize="16px">Amount</Text>
+                                <Input keyboardType="numeric" mt='12px'
                                     onChangeText={handleChange('amount')}
                                     onBlur={handleBlur('amount')}
-                                    value={values.amount} 
+                                    value={values.amount}
                                     size="md" variant='outline' placeholder='Amount'></Input>
                                 <Box color="red.500" mt='2px'>
-                                    <ErrorMessage name="amount"/>
+                                    <ErrorMessage name="amount" />
                                 </Box>
-                                
                             </Box>
 
                             <Box mt='24px'>
-                                <Text bold fontSize="lg">Transaction Type</Text>
-                                <Select mt='16px' accessibilityLabel="Transaction Type" placeholder="Transaction Type"
+                                <Text fontSize="16px">Transaction Type</Text>
+                                <Select mt='12px' accessibilityLabel="Transaction Type" placeholder="Transaction Type"
                                     onValueChange={handleChange('transactionType')}
                                     onBlur={handleBlur('transactionType')}
                                     value={values.transactionType}>
@@ -72,25 +90,25 @@ export default function AddTransaction({ navigation }) {
                                     <Select.Item label="Debit" value="0" />
                                 </Select>
                                 <Box color="red.500" mt='2px'>
-                                    <ErrorMessage name="transactionType"/>
+                                    <ErrorMessage name="transactionType" />
                                 </Box>
                             </Box>
 
                             <Box mt='24px'>
-                                <Text bold fontSize="lg">Memo</Text>
-                                <TextArea 
-                                onChangeText={handleChange('memo')}
-                                onBlur={handleBlur('memo')}
-                                value={values.memo}
-                                 mt='16px' h={20} placeholder="e.g. Milk" />
+                                <Text fontSize="16px">Memo</Text>
+                                <TextArea
+                                    onChangeText={handleChange('memo')}
+                                    onBlur={handleBlur('memo')}
+                                    value={values.memo}
+                                    mt='12px' h={20} placeholder="e.g. Milk" />
                                 <Box color="red.500" mt='2px'>
-                                    <ErrorMessage name="memo"/>
+                                    <ErrorMessage name="memo" />
                                 </Box>
                             </Box>
 
-                            <Box mt='24px' mb="24px">
-                                <Text bold fontSize="lg">Category</Text>
-                                <Select mt='16px' accessibilityLabel="Category" placeholder="Category"
+                            <Box mt='24px'>
+                                <Text fontSize="16px">Category</Text>
+                                <Select mt='12px' accessibilityLabel="Category" placeholder="Category"
                                     onValueChange={handleChange('category')}
                                     onBlur={handleBlur('category')}
                                     value={values.category} >
@@ -100,14 +118,14 @@ export default function AddTransaction({ navigation }) {
                                     <Select.Item label="Entertainment" value="3" />
                                 </Select>
                                 <Box color="red.500" mt='2px'>
-                                    <ErrorMessage name="category"/>
+                                    <ErrorMessage name="category" />
                                 </Box>
                             </Box>
 
-                            <Divider></Divider>
+
                             <Box mt='24px'>
-                                <Text bold fontSize="lg">Additional Tags</Text>
-                                <HStack mt="10px">
+                                <Text fontSize="16px">Additional Tags</Text>
+                                <HStack mt="12px">
                                     {
                                         selectedAdditionalTags.map(key =>
                                             <Pressable key={key} onPress={() => handleAdditionalTagBadgePress(key)}>
@@ -120,7 +138,7 @@ export default function AddTransaction({ navigation }) {
                                         )
                                     }
                                 </HStack>
-                                <Select mt='16px' accessibilityLabel="Transaction Type" placeholder="Additional Tags"
+                                <Select mt='12px' accessibilityLabel="Transaction Type" placeholder="Additional Tags"
                                     onValueChange={handleAdditionalTagsChange} >
                                     {additionalTags && additionalTags.filter(x => !selectedAdditionalTags.includes(x)).map(key =>
                                         <Select.Item label={key} value={key} key={key} />
@@ -129,7 +147,7 @@ export default function AddTransaction({ navigation }) {
                                 </Select>
                             </Box>
 
-                            <Button mt='24px' onPress={handleSubmit} endIcon={<AddIcon />}> Add Transaction  </Button>
+                            <Button bg="#2563EB" mt='24px' onPress={handleSubmit} endIcon={<AddIcon />}> Add Transaction  </Button>
                         </Box>
                     )}
                 </Formik>

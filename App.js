@@ -3,9 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./screens/Home";
 import AddTransaction from "./screens/AddTransaction";
-import login from "./screens/login";
-import login2 from "./screens/Login2";
+import Login from "./screens/Login";
 import Registration from "./screens/Registration";
+import Splash from "./screens/Splash"
 import Menu from "./screens/Menu";
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <NativeBaseProvider>
         <Stack.Navigator
-          initialRouteName="Registration"
+          initialRouteName="Splash"
           screenOptions={{ headerShown: false, cardStyle: { flex: 1 } }}
         >
           <Stack.Screen
@@ -23,9 +23,10 @@ export default function App() {
             component={Home}
           />
           <Stack.Screen name="AddTransaction" component={AddTransaction} />
-          <Stack.Screen name="login2" component={login2} />
+          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="Menu" component={Menu} />
+          <Stack.Screen name="Splash" component={Splash} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
