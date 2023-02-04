@@ -1,7 +1,7 @@
 import { useFocusEffect, useIsFocused } from "@react-navigation/core";
 import { useCallback, useEffect, useState } from "react";
 
-const useFetch = (url) => {
+const useFetch = (url,user) => {
     const isFocused = useIsFocused();
     const [data, setData] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false);

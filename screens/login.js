@@ -1,137 +1,95 @@
-import React from "react";
-import {
-  Input,
-  Icon,
-  Stack,
-  Pressable,
-  Center,
-  NativeBaseProvider,
-  Button,
-  Box,
-  Link,
-} from "native-base";
-import { VStack } from "native-base";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-
+import React, { useEffect } from "react";
+import { Input,Icon,Pressable,Button,Box,Text,Link, } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as yup from 'yup';
+import { ErrorMessage, Formik } from 'formik'
+import post from '../libraries/post'
+import {setStore} from "../libraries/store";
+import { auth } from "../firebase";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 
-
-const Inputt = () => {
+export default function Login({ navigation }) {
   const [show, setShow] = React.useState(false);
-  const auth = getAuth();
-  function CreateUser(email, password) {
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
+  let userLoginSchema = yup.object().shape({
+    password: yup.string().required("Please enter a password").min(6),
+    email: yup.string().email().required("Email is required"),
+  });
 
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
 
-        // ..
-      });
-  }
-  function LoginUser(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log(user);
+  async function login(values) {
+    var fbObject = await signInWithEmailAndPassword(auth, values.email, values.password);
+    if(!fbObject.user) { 
+      console.log('Error'); 
+      return
+    }
+    var userId = fbObject.user.uid;
+      var user = {
+        email : values.email,
+        userId
+      }
+      await setStore('userLoggedIn', true)
+      await setStore('user',user)
+      navigation.navigate('Home')
+    }
+  
 
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-
-      });
-  }
-  //   CreateUser("byeole80@gmail.com", "passwe122")
-  // LoginUser("byeole80@gmail.com", "passwe122")
-  function Login() {
-    console.log('Login Success')
-  }
   return (
-    <VStack space={4} w="100%" alignItems="center">
-      <Input
-        w={{
-          base: "75%",
-          md: "25%",
-        }}
-        InputLeftElement={
-          <Icon
-            as={<MaterialIcons name="person" />}
-            size={5}
-            ml="2"
-            color="muted.400"
-          />
-        }
-        placeholder="Name"
-      />
-      <Input
-        w={{
-          base: "75%",
-          md: "25%",
-        }}
-        type={show ? "text" : "password"}
-        InputRightElement={
-          <Pressable onPress={() => setShow(!show)}>
-            <Icon
-              as={
-                <MaterialIcons name={show ? "visibility" : "visibility-off"} />
-              }
-              size={5}
-              mr="2"
-              color="muted.400"
-            />
-          </Pressable>
-        }
-        placeholder="Password"
-      />
-    </VStack>
-  );
-};
+    <Box bg="#2563EB" h="100%" display="flex" flexDirection="column">
+      <Text margin="24px" fontSize="28px" fontWeight="medium" color="#FAFAFA">Sign In</Text>
+      <Box h="100%" bg="#FAFAFA" padding="24px" borderTopLeftRadius="25px" borderTopRightRadius="25px">
+        <Formik onSubmit={login} initialValues={{  email: '', password: ''}} validationSchema={userLoginSchema}>
+          {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+            <Box  h="100%">
+              <Box>
+                <Input
+                  borderColor={errors.email ? 'red.500' : 'muted.300'}
+                  onChangeText={handleChange('email')}
+                  onBlur={handleBlur('email')}
+                  value={values.email}
+                  placeholder="Email"
+                />
+                <Box mt="2px" fontSize="sm" color="red.400">
+                  <ErrorMessage name="email" />
+                </Box>
+              </Box>
 
+              <Box mt="16px">
+                <Input
+                  borderColor={errors.password ? 'red.500' : 'muted.300'}
+                  onChangeText={handleChange('password')}
+                  onBlur={handleBlur('password')}
+                  value={values.password}
+                  type={show ? "text" : "password"}
+                  InputRightElement={
+                    <Pressable onPress={() => setShow(!show)}>
+                      <Icon
+                        as={
+                          <MaterialIcons
+                            name={show ? "visibility" : "visibility-off"}
+                          />
+                        }
+                        size={5}
+                        mr="2"
+                        color="muted.400"
+                      />
+                    </Pressable>
+                  }
+                  placeholder="Password"
+                />
+                <Box mt="2px" fontSize="sm" color="red.400">
+                  <ErrorMessage name="password" />
+                </Box>
+              </Box>
 
-const ButtonSubmit = () => {
-  //sdf
-  return (
-    <Box alignItems="center">
-      <Button onPress={() => Login}>Login</Button>
+              <Button mt="24px" bg="#2563EB" onPress={handleSubmit}>Login</Button>
+
+              <Link mt="24px" onPress={() => navigation.navigate('Registration')}>Register</Link>
+
+            </Box>
+          )}
+        </Formik>
+      </Box>
     </Box>
   );
-};
-
-const Forgot = () => {
-  //ghf
-  return (
-    <Box alignItems="center">
-      <Link href="https://nativebase.io">Forgot Password ?</Link>
-    </Box>
-  );
-};
-
-export default () => {
-
-  //df
-
-
-  return (
-    <NativeBaseProvider>
-      <Center flex={1} px="3">
-        <VStack space={4} alignItems="center" w="1000">
-          <Inputt />
-          <ButtonSubmit />
-          <Forgot />
-        </VStack>
-      </Center>
-    </NativeBaseProvider>
-  );
-};
+}
