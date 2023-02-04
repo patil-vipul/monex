@@ -2,8 +2,7 @@ import { AddIcon, Text, Fab, Box, Skeleton,HStack,Pressable } from "native-base"
 import Header from '../components/Header';
 import BalanceCard from '../components/BalanceCard';
 import TransactionList from '../components/TransactionList';
-import useFetch from "../hooks/useFetch";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { getStore } from "../libraries/store";
 import get from "../libraries/get";

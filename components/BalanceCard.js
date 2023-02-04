@@ -1,7 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { Text, Box, Skeleton } from "native-base";
-import { useEffect, useState } from "react";
-import useFetch from "../hooks/useFetch";
+import { useState } from "react";
 import get from "../libraries/get";
 import { getStore } from "../libraries/store";
 export default function BalanceCard({style}) {
