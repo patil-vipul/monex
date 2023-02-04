@@ -1,28 +1,15 @@
 import React, { useEffect } from "react";
-import {
-  VStack,
-  Input,
-  Icon,
-  Pressable,
-  Center,
-  Button,
-  Box,
-  Text,
-  Link,
-} from "native-base";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { Input,Icon,Pressable,Button,Box,Text,Link, } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as yup from 'yup';
 import { ErrorMessage, Formik } from 'formik'
+import post from '../libraries/post'
+import {setStore} from "../libraries/store";
+import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-export default function Signup({ navigation }) {
+export default function Registration({ navigation }) {
   const [show, setShow] = React.useState(false);
-  const [email, setEmail] = React.useState(null);
-  const [password, setPassword] = React.useState(null);
 
   let userRegistrationSchema = yup.object().shape({
     password: yup.string().required("Please enter a password").min(6),
@@ -30,39 +17,20 @@ export default function Signup({ navigation }) {
   });
 
 
-  useEffect(() => {
-    //  setEmail('bhavesh')
-  }, []);
-  // validate: value =>
-  // value === password.current || "The passwords do not match"
-  const auth = getAuth();
-
-  // function createUser(email, password) {
-
-
-  //   return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-  //       // Signed in
-  //       const user = userCredential.user;
-  //       console.log(user);
-  //       return "bhavesh";
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       console.log(errorMessage);
-  //       // ..
-  //     });
-  // }
   async function register(values) {
-    console.log('Creating firebase user')
     var fbObject = await createUserWithEmailAndPassword(auth, values.email, values.password);
-    var userID = fbObject.user.uid;
-
-    //res = (uid, name, email, pass, phone)
-    //res == true
-    //to homepage
-    //error show 
+    var userId = fbObject.user.uid;
+    var registerInMongo = await post('http://localhost:3333/register',{firebaseId:userId, email:values.email})
+    if(registerInMongo.status == 200){
+      registerInMongo = await registerInMongo.json()
+      var user = {
+        email : values.email,
+        userId
+      }
+      await setStore('userLoggedIn', true)
+      await setStore('user',user)
+      navigation.navigate('Home')
+    } 
   }
 
   return (
@@ -115,7 +83,7 @@ export default function Signup({ navigation }) {
 
               <Button mt="24px" bg="#2563EB" onPress={handleSubmit}>Register</Button>
 
-              <Link mt="24px" onPress={() => navigation.navigate('login2')}>Login</Link>
+              <Link mt="24px" onPress={() => navigation.navigate('Login')}>Login</Link>
 
             </Box>
           )}
