@@ -1,20 +1,51 @@
-import { AddIcon, Text, Fab, Box, Skeleton } from "native-base";
+import { AddIcon, Text, Fab, Box, Skeleton,HStack,Pressable } from "native-base";
 import Header from '../components/Header';
 import BalanceCard from '../components/BalanceCard';
 import TransactionList from '../components/TransactionList';
 import useFetch from "../hooks/useFetch";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { getStore } from "../libraries/store";
+import get from "../libraries/get";
 export default function Home({ navigation }) {
-    const { data: transactions, isLoaded:isTransactionLoaded, error, setData } = useFetch('http://localhost:3333/transactions') 
+    const [transactions, setTransactions] = useState(null)
+    const [isTransactionLoaded, setIsTransactionLoaded] = useState(false)
+   
+    useFocusEffect(()=>{
+
+        async function getUserId(){
+            let user = await getStore('user');
+            return user.userId  
+        }
+        
+        async function loadBalance(){
+            var userId = await getUserId();
+            var t = await get(`http://localhost:3333/transactions/${userId}/6`)
+            t = await t.json()
+            if(t.success){
+                setTransactions(t.result)
+                setIsTransactionLoaded(true)
+               // setTransactions(balance.result.balance.$numberDecimal)
+               // setIsBalanceLoaded(true)
+            }
+           
+        }
+        loadBalance()
+    })
+
     return (
-        <Box bg="#fff" h="100%">
-            <Box margin="32px">
-
+        <Box bg="#fff" h="100%" padding="24px">
+            <Box>
                 <Header></Header>
+                <BalanceCard style={{ marginTop: '16px' }}></BalanceCard>
+                <HStack space={3} justifyContent="space-between">
+                    <Text fontSize="16px" mt="24px" mb="16px">Transactions</Text>
 
-                <BalanceCard></BalanceCard>
+                    <Pressable>
+                        <Text fontSize="16px" mt="24px" color="#2563EB" mb="16px">View All</Text>
+                    </Pressable>
+                </HStack>
 
-                <Text fontSize="lg" my="16px">Transactions</Text>
 
                 <Skeleton h="20" rounded="5" isLoaded={isTransactionLoaded}>
                     <TransactionList transactions={transactions}></TransactionList>

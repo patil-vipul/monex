@@ -3,7 +3,7 @@ import moment from 'moment/moment';
 
 export default function TransactionList({ transactions }) {
 
-    console.log(transactions[0].amount,'int list')
+
     return (
         <FlatList data={transactions} renderItem={({
             item
@@ -14,5 +14,6 @@ export default function TransactionList({ transactions }) {
                 </HStack>
                 <Text fontSize="xl">₹ {item.amount.$numberDecimal}</Text>
             </Box>} keyExtractor={item => item._id} />
+        
     )
 }
