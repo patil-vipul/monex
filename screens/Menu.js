@@ -1,15 +1,11 @@
 import React from "react";
 import {
   Box,
-  Center,
-  NativeBaseProvider,
   HStack,
-  VStack,
   Icon,
   Text,
   Button,
   AddIcon,
-  AspectRatio,
   Image,
   Heading,
   Stack,

@@ -6,7 +6,6 @@ export default function Header(props) {
     var [isEmailLoaded, setIsEmailLoaded] = useState(false)
     var [avatar, setAvatar] = useState(null)
     useEffect(() => {
-        console.log("Fetching email")
         async function fetchEmail() {
             let user = await getStore('user')
             console.log(user)
@@ -18,7 +17,6 @@ export default function Header(props) {
         }
         fetchEmail()
     }, [])
-    // js logic
 
     return (
         <Box>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { } from "react";
 import { Input,Icon,Pressable,Button,Box,Text,Link, } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as yup from 'yup';

@@ -1,12 +1,6 @@
 import React, { useEffect } from "react";
-import { Input,Icon,Pressable,Button,Box,Text,Link, } from "native-base";
-import { MaterialIcons } from "@expo/vector-icons";
-import * as yup from 'yup';
-import { ErrorMessage, Formik } from 'formik'
-import post from '../libraries/post'
-import {getStore, setStore} from "../libraries/store";
-import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {getStore} from "../libraries/store";
+
 
 export default function Registration({ navigation }) {
  
@@ -17,7 +11,6 @@ export default function Registration({ navigation }) {
         navigation.navigate('Login')
       }
     })
-    //checkUserLoggedIn()
   },[])
 
   return (

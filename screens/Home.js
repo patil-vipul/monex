@@ -1,22 +1,21 @@
 import { AddIcon, Text, Fab, Box, Skeleton,HStack,Pressable } from "native-base";
 import Header from '../components/Header';
 import BalanceCard from '../components/BalanceCard';
-import TransactionList from '../components/TransactionList';
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { getStore } from "../libraries/store";
 import get from "../libraries/get";
+import TransactionListNew from "../components/TransactionList";
 export default function Home({ navigation }) {
     const [transactions, setTransactions] = useState(null)
     const [isTransactionLoaded, setIsTransactionLoaded] = useState(false)
    
-    useFocusEffect(()=>{
+    useFocusEffect(useCallback(()=>{
 
         async function getUserId(){
             let user = await getStore('user');
             return user.userId  
         }
-        
         async function loadBalance(){
             var userId = await getUserId();
             var t = await get(`http://localhost:3333/transactions/${userId}/6`)
@@ -30,7 +29,7 @@ export default function Home({ navigation }) {
            
         }
         loadBalance()
-    })
+    },[]))
 
     return (
         <Box bg="#fff" h="100%" padding="24px">
@@ -47,7 +46,7 @@ export default function Home({ navigation }) {
 
 
                 <Skeleton h="20" rounded="5" isLoaded={isTransactionLoaded}>
-                    <TransactionList transactions={transactions}></TransactionList>
+                    <TransactionListNew transactions={transactions}></TransactionListNew>
                 </Skeleton>
 
             </Box>
