@@ -1,3 +1,4 @@
+import { Box,Text } from "native-base";
 import React, { useEffect } from "react";
 import {getStore} from "../libraries/store";
 
