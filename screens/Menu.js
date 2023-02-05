@@ -17,7 +17,6 @@ import {
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import SpendCard from "../components/SpendCard";
 
 export default function Menu({ navigation }) {
   const [clickable, setClickable] = React.useState(false);
@@ -59,7 +58,7 @@ export default function Menu({ navigation }) {
             </Stack>
 
             <Text fontSize="lg" bold>
-              <SpendCard></SpendCard>
+              {/* <SpendCard></SpendCard> */}
             </Text>
           </Stack>
         </Box>

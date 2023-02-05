@@ -6,6 +6,7 @@ import AddTransaction from "./screens/AddTransaction";
 import Login from "./screens/Login";
 import Registration from "./screens/Registration";
 import Splash from "./screens/Splash"
+import Transactions from "./screens/Transactions"
 import Menu from "./screens/Menu";
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="Menu" component={Menu} />
           <Stack.Screen name="Splash" component={Splash} />
+          <Stack.Screen name="Transactions" component={Transactions} />
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
