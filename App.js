@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -18,10 +19,126 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Budget" component={Menu} />
-      <Tab.Screen name="Analytics" component={Transactions} />
-      <Tab.Screen name="Profile" component={TransactionDetails} />
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+              }}
+            >
+              <Image
+                source={require("../monex/assets/home.png")}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintcolor: focused ? "#2563EB" : "#748c94",
+                }}
+              />
+              <Text
+                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
+              >
+                Home
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Budget"
+        component={Menu}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+              }}
+            >
+              <Image
+                source={require("../monex/assets/budget.png")}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintcolor: focused ? "#2563EB" : "#748c94",
+                }}
+              />
+              <Text
+                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
+              >
+                Budget
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Analytics"
+        component={Transactions}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+              }}
+            >
+              <Image
+                source={require("../monex/assets/chart.png")}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintcolor: focused ? "#2563EB" : "#748c94",
+                }}
+              />
+              <Text
+                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
+              >
+                Analytics
+              </Text>
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={TransactionDetails}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                top: 10,
+              }}
+            >
+              <Image
+                source={require("../monex/assets/profile.png")}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                  tintcolor: focused ? "#2563EB" : "#748c94",
+                }}
+              />
+              <Text
+                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
+              >
+                Profile
+              </Text>
+            </View>
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };
