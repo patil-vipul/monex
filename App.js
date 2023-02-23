@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
@@ -18,7 +19,23 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarStyle={styles.shadow}
+      screenOptions={{
+        showLabel: false,
+
+        style: {
+          position: "absolute",
+          bottom: 25,
+          left: 20,
+          right: 20,
+          elevation: 0,
+          backgroundColor: "#ffffff",
+          borderRadius: 15,
+          height: 90,
+        },
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={Home}
@@ -37,7 +54,7 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintcolor: focused ? "#2563EB" : "#748c94",
+                  tintcolor: focused ? "#2563EB " : "#748c94",
                 }}
               />
               <Text
