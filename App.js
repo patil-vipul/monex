@@ -13,7 +13,11 @@ import Splash from "./screens/Splash";
 import Transactions from "./screens/Transactions";
 import TransactionDetails from "./screens/TransactionDetails";
 import Menu from "./screens/Menu";
-
+import Profile from "./screens/Profile";
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+/>;
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -25,14 +29,20 @@ const Tabs = () => {
         showLabel: false,
 
         style: {
-          position: "absolute",
-          bottom: 25,
-          left: 20,
-          right: 20,
-          elevation: 0,
-          backgroundColor: "#ffffff",
-          borderRadius: 15,
-          height: 90,
+          backgroundColor: "#fff",
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
+          height: 70,
+          paddingTop: 10,
+          paddingBottom: 5,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: -3,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 5,
+          elevation: 5,
         },
       }}
     >
@@ -128,7 +138,7 @@ const Tabs = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={TransactionDetails}
+        component={Profile}
         options={{
           tabBarIcon: ({ focused }) => (
             <View
