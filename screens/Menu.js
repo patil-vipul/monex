@@ -13,7 +13,6 @@ import {
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 
-
 export default function Menu({ navigation }) {
   const [clickable, setClickable] = React.useState(false);
 
@@ -67,8 +66,8 @@ export default function Menu({ navigation }) {
           colorScheme="gray"
           shadow={2}
           marginLeft="38"
-        // alignItems="center"
-        // justifyContent="center"
+          // alignItems="center"
+          // justifyContent="center"
         ></IconButton>
       </HStack>
       <HStack

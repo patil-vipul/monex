@@ -23,29 +23,7 @@ const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
   return (
-    <Tab.Navigator
-      tabBarStyle={styles.shadow}
-      screenOptions={{
-        showLabel: false,
-
-        style: {
-          backgroundColor: "#fff",
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          height: 70,
-          paddingTop: 10,
-          paddingBottom: 5,
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: -3,
-          },
-          shadowOpacity: 0.2,
-          shadowRadius: 5,
-          elevation: 5,
-        },
-      }}
-    >
+    <Tab.Navigator tabBarStyle={styles.shadow}>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -180,6 +158,7 @@ export default function App() {
         >
           <Stack.Screen name="Splash" component={Splash} />
           <Stack.Screen name="Login" component={Login} />
+
           <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen
             name="Home"

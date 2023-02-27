@@ -1,66 +1,146 @@
 import React from "react";
-import TransactionListNew from "../components/TransactionList";
-import { StyleSheet, Text, View } from "react-native";
-const Profile = () => {
-  const name = "John Doe";
-  const balance = 5000;
-  const accountType = "Savings Account";
-  const accountNumber = "0123456789";
+import {
+  Box,
+  HStack,
+  Icon,
+  Text,
+  Button,
+  AddIcon,
+  Image,
+  Heading,
+  Stack,
+  IconButton,
+} from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
+import email from "../components/Header";
+
+export default function Profile({ navigation }) {
+  const [clickable, setClickable] = React.useState(false);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Profile</Text>
-      </View>
-      <View style={styles.content}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.balance}>Balance: ${balance}</Text>
-        <Text style={styles.accountType}>{accountType}</Text>
-        <Text style={styles.accountNumber}>
-          Account Number: {accountNumber}
-        </Text>
-      </View>
-    </View>
+    <Box padding="24px" backgroundColor="white">
+      <HStack space="20">
+        <Image
+          size={200}
+          borderRadius={100}
+          marginTop="3"
+          marginBottom="5"
+          marginLeft="20"
+          paddingLeft="160"
+          source={{
+            uri: "https://wallpaperaccess.com/full/317501.jpg",
+          }}
+          alt="Alternate Text"
+        />
+      </HStack>
+      <Text bold marginTop="4" textAlign="center" size="10">
+        Bhavesh Yeole, {email}
+      </Text>
+      <HStack
+        marginBottom="30px"
+        shadow={6}
+        padding="8px"
+        borderWidth="2"
+        paddingLeft="16px"
+        alignItems="center"
+        rounded="6px"
+        borderColor="trueGray.200"
+      >
+        <Box>
+          <Stack p="4" space={3}>
+            <Stack space={2}>
+              <Heading size="xl" ml="-1">
+                The Garden City
+              </Heading>
+            </Stack>
+
+            <Text fontSize="lg" bold>
+              {/* <SpendCard></SpendCard> */}
+            </Text>
+          </Stack>
+        </Box>
+        <IconButton
+          icon={<Icon as={MaterialIcons} name="arrow-forward" />}
+          width="8"
+          height="8"
+          rounded="100%"
+          variant="subtle"
+          colorScheme="gray"
+          shadow={2}
+          marginLeft="38"
+          // alignItems="center"
+          // justifyContent="center"
+        ></IconButton>
+      </HStack>
+      <HStack
+        marginBottom="15px"
+        shadow={6}
+        padding="8px"
+        borderWidth="2"
+        paddingLeft="16px"
+        alignItems="center"
+        rounded="6px"
+        borderColor="trueGray.200"
+      >
+        <AddIcon marginRight="16px"></AddIcon>
+        <Box>
+          <Text fontWeight="500">Settings</Text>
+          <Text>This is the text for settings</Text>
+        </Box>
+      </HStack>
+      <HStack
+        marginBottom="15px"
+        shadow={6}
+        padding="8px"
+        borderWidth="2"
+        paddingLeft="16px"
+        alignItems="center"
+        rounded="6px"
+        borderColor="trueGray.200"
+      >
+        <Box marginRight="16px">
+          <MaterialIcons size={30} name="history" />
+        </Box>
+        <Box>
+          <Text fontWeight="500">Transactions</Text>
+          <Text>This is the text for settings</Text>
+        </Box>
+      </HStack>
+      <HStack
+        marginBottom="15px"
+        shadow={6}
+        padding="8px"
+        borderWidth="2"
+        paddingLeft="16px"
+        alignItems="center"
+        rounded="6px"
+        borderColor="trueGray.200"
+      >
+        <Box marginRight="16px">
+          <MaterialIcons size={30} name="settings" />
+        </Box>
+        <Box>
+          <Text fontWeight="500">Settings</Text>
+          <Text>This is the text for settings</Text>
+        </Box>
+      </HStack>
+      <HStack>
+        <Button
+          variant="outline"
+          marginBottom="15px"
+          shadow={3}
+          width="364"
+          height="66"
+          borderWidth="2"
+          borderColor="black"
+          paddingLeft="16px"
+          alignItems="center"
+          rounded="6px"
+          marginTop="5"
+        >
+          Logout
+        </Button>
+      </HStack>
+    </Box>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 20,
-  },
-  header: {
-    backgroundColor: "#4169e1",
-    padding: 10,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  headerText: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  content: {
-    alignItems: "center",
-  },
-  name: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  balance: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-  accountType: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-  accountNumber: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-});
-
-export default Profile;
+}
