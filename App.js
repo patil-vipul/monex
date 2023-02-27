@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./screens/Home";
 import AddTransaction from "./screens/AddTransaction";
 import Login from "./screens/Login";
@@ -14,16 +14,17 @@ import Transactions from "./screens/Transactions";
 import TransactionDetails from "./screens/TransactionDetails";
 import Menu from "./screens/Menu";
 import Profile from "./screens/Profile";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
 />;
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const Tabs = () => {
   return (
-    <Tab.Navigator tabBarStyle={styles.shadow}>
+    <Tab.Navigator barStyle={{ backgroundColor: "#f0f8ff" }}>
       <Tab.Screen
         name="Home"
         component={Home}
@@ -33,7 +34,7 @@ const Tabs = () => {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                top: 10,
+                // top: 10,
               }}
             >
               <Image
@@ -45,11 +46,6 @@ const Tabs = () => {
                   tintcolor: focused ? "#2563EB " : "#748c94",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
-              >
-                Home
-              </Text>
             </View>
           ),
         }}
@@ -63,7 +59,7 @@ const Tabs = () => {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                top: 10,
+                // top: 10,
               }}
             >
               <Image
@@ -75,15 +71,11 @@ const Tabs = () => {
                   tintcolor: focused ? "#2563EB" : "#748c94",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
-              >
-                Budget
-              </Text>
             </View>
           ),
         }}
       />
+
       <Tab.Screen
         name="Analytics"
         component={Transactions}
@@ -93,7 +85,7 @@ const Tabs = () => {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                top: 10,
+                // top: 10,
               }}
             >
               <Image
@@ -105,11 +97,6 @@ const Tabs = () => {
                   tintcolor: focused ? "#2563EB" : "#748c94",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
-              >
-                Analytics
-              </Text>
             </View>
           ),
         }}
@@ -123,7 +110,7 @@ const Tabs = () => {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                top: 10,
+                // top: 10,
               }}
             >
               <Image
@@ -135,11 +122,6 @@ const Tabs = () => {
                   tintcolor: focused ? "#2563EB" : "#748c94",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#2563EB" : "#748c94", fontSize: 12 }}
-              >
-                Profile
-              </Text>
             </View>
           ),
         }}
@@ -165,11 +147,11 @@ export default function App() {
             options={{ headerShown: false }}
             component={Tabs}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="AddTransaction"
             options={{ title: "Add Transaction" }}
             component={AddTransaction}
-          />
+          /> */}
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>
