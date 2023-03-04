@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles";
 import {
   Box,
   HStack,
@@ -14,52 +15,49 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import email from "../components/Header";
 
+import App from "../App";
+
 export default function Profile({ navigation }) {
   const [clickable, setClickable] = React.useState(false);
 
   return (
-    <Box padding="24px" backgroundColor="white">
-      <HStack space="20">
-        <Image
-          size={200}
-          borderRadius={100}
-          marginTop="3"
-          marginBottom="5"
-          marginLeft="20"
-          paddingLeft="160"
-          source={{
-            uri: "https://wallpaperaccess.com/full/317501.jpg",
-          }}
-          alt="Alternate Text"
-        />
-      </HStack>
-      <Text bold marginTop="4" textAlign="center" size="10">
-        Bhavesh Yeole, {email}
-      </Text>
+    <Box backgroundColor="white">
       <HStack
         marginBottom="30px"
-        shadow={6}
+        shadow={0.5}
         padding="8px"
-        borderWidth="2"
+        borderBottomWidth="2"
         paddingLeft="16px"
         alignItems="center"
         rounded="6px"
         borderColor="trueGray.200"
       >
         <Box>
-          <Stack p="4" space={3}>
-            <Stack space={2}>
-              <Heading size="xl" ml="-1">
-                The Garden City
-              </Heading>
-            </Stack>
-
+          <Stack p="4" space={3} height="60">
+            <HStack>
+              <Image
+                size={55}
+                borderRadius={100}
+                marginTop="-3"
+                marginLeft="-4"
+                source={require("../assets/bsy.jpg")}
+                alt="Profile Image"
+              ></Image>
+              <Stack space={2} marginLeft="-15">
+                <Text fontSize="md" paddingLeft="35" marginTop="-1">
+                  Bhavesh Yeole
+                </Text>
+                <Text fontSize="12" paddingLeft="35" marginTop="-3">
+                  bsy12345@gmail.com
+                </Text>
+              </Stack>
+            </HStack>
             <Text fontSize="lg" bold>
               {/* <SpendCard></SpendCard> */}
             </Text>
           </Stack>
         </Box>
-        <IconButton
+        {/* <IconButton
           icon={<Icon as={MaterialIcons} name="arrow-forward" />}
           width="8"
           height="8"
@@ -67,76 +65,49 @@ export default function Profile({ navigation }) {
           variant="subtle"
           colorScheme="gray"
           shadow={2}
-          marginLeft="38"
-          // alignItems="center"
-          // justifyContent="center"
-        ></IconButton>
+          marginLeft="96px"
+          marginTop="-7"
+        ></IconButton> */}
       </HStack>
+
       <HStack
-        marginBottom="15px"
-        shadow={6}
-        padding="8px"
-        borderWidth="2"
-        paddingLeft="16px"
         alignItems="center"
-        rounded="6px"
-        borderColor="trueGray.200"
-      >
-        <AddIcon marginRight="16px"></AddIcon>
-        <Box>
-          <Text fontWeight="500">Settings</Text>
-          <Text>This is the text for settings</Text>
-        </Box>
-      </HStack>
-      <HStack
         marginBottom="15px"
-        shadow={6}
         padding="8px"
-        borderWidth="2"
-        paddingLeft="16px"
+        marginTop="-5"
+        paddingLeft="25px"
         alignItems="center"
         rounded="6px"
         borderColor="trueGray.200"
       >
         <Box marginRight="16px">
-          <MaterialIcons size={30} name="history" />
+          <MaterialIcons size={18} name="settings" />
         </Box>
         <Box>
-          <Text fontWeight="500">Transactions</Text>
-          <Text>This is the text for settings</Text>
+          <Text fontSize="sm">Settings</Text>
         </Box>
       </HStack>
       <HStack
-        marginBottom="15px"
-        shadow={6}
-        padding="8px"
-        borderWidth="2"
-        paddingLeft="16px"
-        alignItems="center"
-        rounded="6px"
-        borderColor="trueGray.200"
+        mb="2.5"
+        mt="1.5"
+        direction={{
+          base: "column",
+          md: "row",
+        }}
+        space={2}
+        mx={{
+          base: "auto",
+          md: "0",
+        }}
       >
-        <Box marginRight="16px">
-          <MaterialIcons size={30} name="settings" />
-        </Box>
-        <Box>
-          <Text fontWeight="500">Settings</Text>
-          <Text>This is the text for settings</Text>
-        </Box>
-      </HStack>
-      <HStack>
         <Button
-          variant="outline"
-          marginBottom="15px"
-          shadow={3}
-          width="364"
-          height="66"
-          borderWidth="2"
-          borderColor="black"
-          paddingLeft="16px"
-          alignItems="center"
-          rounded="6px"
-          marginTop="5"
+          variant="ghost"
+          marginTop="378"
+          shadow={2}
+          width="350"
+          height="50"
+          borderWidth="1"
+          borderColor="trueGray.100"
         >
           Logout
         </Button>
