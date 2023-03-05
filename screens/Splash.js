@@ -7,7 +7,7 @@ export default function Registration({ navigation }) {
  
   useEffect(()=>{
     getStore('userLoggedIn').then((value)=>{
-      if(value) navigation.navigate('Home')
+      if(value) navigation.navigate('HomeTabs')
       else{
         navigation.navigate('Login')
       }

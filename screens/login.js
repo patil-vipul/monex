@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
       }
       await setStore('userLoggedIn', true)
       await setStore('user',user)
-      navigation.navigate('Home')
+      navigation.navigate('HomeTabs')
     }
   
 

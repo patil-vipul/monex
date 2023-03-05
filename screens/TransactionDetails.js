@@ -1,35 +1,23 @@
-import {
-  Text,
-  Box,
-  HStack,
-  Button,
-  ChevronLeftIcon,
-  VStack,
-  Badge,
-  Divider,
-  AlertDialog,
-  Alert,
-  useToast,
-} from "native-base";
+import {Text,Box,HStack,Button,ChevronLeftIcon,VStack,Badge,Divider,AlertDialog,Alert,useToast,} from "native-base";
 import moment from "moment";
-import { useRef, useState } from "react";
-import get from "../libraries/get";
-import Home from "./Home";
-import { async } from "@firebase/util";
+import {useState } from "react";
+import post from "../libraries/post";
+import { getStore } from "../libraries/store";
+
 export default function TransactionDetails({ navigation, route }) {
   const transaction = route.params.transaction;
   const [isOpen, setIsOpen] = useState(false);
   const toast = useToast();
 
   const onClose = async () => {
-    // setIsOpen(false);
-    console.log("deleting transaction ", transaction._id);
-    var deleted = await get(
-      `http://localhost:3333/transaction/delete/${transaction._id}`
-    );
+    async function getUserId(){
+      let user = await getStore('user');
+      return user.userId  
+    }
+    var userId = await getUserId() 
+    var deleted = await post(`http://localhost:3333/transaction/delete`,{transactionId:transaction._id,userId });
     deleted = await deleted.json();
-
-    if (deleted.success) {
+    if (deleted.success && deleted.result.deletedCount) {
       toast.show({
         render: () => {
           return (
@@ -43,6 +31,19 @@ export default function TransactionDetails({ navigation, route }) {
         },
       });
       navigation.navigate("Home");
+    }else{
+      toast.show({
+        render: () => {
+          return (
+            <Alert variant="subtle" status={'error'} >
+              <HStack space={2} flexShrink={1} alignItems="center">
+                <Alert.Icon />
+                <Text>Error deleting transaction.</Text>
+              </HStack>
+            </Alert>
+          );
+        },
+      });
     }
   };
   return (

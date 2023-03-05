@@ -14,6 +14,7 @@ export default function Header(props) {
   var [email, setEmail] = useState(null);
   var [isEmailLoaded, setIsEmailLoaded] = useState(false);
   var [avatar, setAvatar] = useState(null);
+  
   useEffect(() => {
     async function fetchEmail() {
       let user = await getStore("user");

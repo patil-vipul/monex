@@ -29,7 +29,7 @@ export default function Registration({ navigation }) {
       }
       await setStore('userLoggedIn', true)
       await setStore('user',user)
-      navigation.navigate('Home')
+      navigation.navigate('HomeTabs')
     } 
   }
 
