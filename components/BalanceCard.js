@@ -16,7 +16,7 @@ export default function BalanceCard({style}) {
             }
             async function loadBalance(){
                 var userId = await getUserId();
-                var balance = await get('http://localhost:3333/balance/'+userId)
+                var balance = await get('https://monex-server.vercel.app/balance/'+userId)
                 balance = await balance.json()
                 if(balance.success){
                     setBalance(balance.result.balance.$numberDecimal)

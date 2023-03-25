@@ -15,7 +15,7 @@ export default function TransactionDetails({ navigation, route }) {
       return user.userId  
     }
     var userId = await getUserId() 
-    var deleted = await post(`http://localhost:3333/transaction/delete`,{transactionId:transaction._id,userId });
+    var deleted = await post(`https://monex-server.vercel.app/transaction/delete`,{transactionId:transaction._id,userId });
     deleted = await deleted.json();
     if (deleted.success && deleted.result.deletedCount) {
       toast.show({

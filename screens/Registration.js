@@ -20,7 +20,7 @@ export default function Registration({ navigation }) {
   async function register(values) {
     var fbObject = await createUserWithEmailAndPassword(auth, values.email, values.password);
     var userId = fbObject.user.uid;
-    var registerInMongo = await post('http://localhost:3333/register',{firebaseId:userId, email:values.email})
+    var registerInMongo = await post('https://monex-server.vercel.app/register',{firebaseId:userId, email:values.email})
     if(registerInMongo.status == 200){
       registerInMongo = await registerInMongo.json()
       var user = {

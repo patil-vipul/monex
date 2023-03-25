@@ -16,7 +16,7 @@ export default function Home({ navigation }) {
         }
         async function loadBalance() {
             var userId = await getUserId();
-            var t = await get(`http://localhost:3333/transactions/${userId}/6`)
+            var t = await get(`https://monex-server.vercel.app/transactions/${userId}/6`)
             t = await t.json()
             if (t.success) {
                 let trans = t.result

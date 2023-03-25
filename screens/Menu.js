@@ -10,9 +10,7 @@ function Profile({ navigation }) {
   var [avatar, setAvatar] = useState(null);
   useEffect(() => {
     async function fetchEmail() {
-      
       let user = await getStore("user");
-      console.log(user);
       if (user.email) {
         setEmail(user.email);
         setAvatar(Array.from(user.email)[0]);

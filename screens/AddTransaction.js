@@ -16,7 +16,7 @@ export default function AddTransaction({ navigation }) {
     });
     const additionalTags = ['Subscription', 'Rent', 'Gaming'];
     const [selectedAdditionalTags, setSelectedAdditionalTags] = useState([])
-    const { call } = useAPI('http://localhost:3333/transaction')
+    const { call } = useAPI('https://monex-server.vercel.app/transaction')
     function handleAdditionalTagsChange(itemValue) {
         let tags = [...selectedAdditionalTags]
         tags.push(itemValue)
